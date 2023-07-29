@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../../services/API";
 
 import { toast } from "react-toastify";
+import {useNavigate } from "react-router-dom";
 
 export const userLogin = createAsyncThunk(
   "auth/login",
@@ -27,6 +28,8 @@ export const userLogin = createAsyncThunk(
 );
 //register
 export const userRegister = createAsyncThunk(
+
+ 
     "auth/register",
     async (
       {
@@ -42,6 +45,7 @@ export const userRegister = createAsyncThunk(
       },
       { rejectWithValue }
     ) => {
+      
       try {
         const { data } = await API.post("/auth/register", {
           name,
@@ -56,7 +60,8 @@ export const userRegister = createAsyncThunk(
         });
         if (data?.success) {
             toast.success("Regestration successfull");
-            window.location.replace("/login");
+            window.location.href = "/login";
+
          
         }
       } catch (error) {
